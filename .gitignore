@@ -1,0 +1,51 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+myenv/
+env/
+venv/
+
+# Excel files
+*.xlsx
+*.xls
+
+# Database
+*.db
+*.sqlite3
+
+# Build files
+build/
+dist/
+
+# Log files
+*.log
+*.tmp
+*.temp
+
+# Temporary files
+*.swp
+*.swo
+*~
+
+# OS files
+Thumbs.db
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
