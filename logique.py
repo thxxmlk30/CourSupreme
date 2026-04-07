@@ -101,23 +101,23 @@ def valider_parrainages(chemin_fichier_parrainages, chemin_fichier_electoral, ca
 def arbitrer_candidature(donnees_candidat, chemin_fichier_parrainages, chemin_fichier_electoral, campagne_id=None):
     """
     Applique l'ensemble des règles de la Cour Suprême.
-    Retourne un tuple : (est_acceptee: bool, motif_rejet: str ou None)
+    Retourne un tuple : (est_acceptee: bool, motif_rejet: str ou None, parrainages_valides: list[str])
     """
     # 1. Âge
     est_age_valide, age = verifier_age(donnees_candidat['date_naissance'])
     if not est_age_valide:
         if age == -1:
-            return False, "Le format de la date de naissance est invalide (attendu: JJ/MM/AAAA)."
-        return False, f"Âge insuffisant : {age} ans. (Âge minimum requis : 35 ans révolus)."
+            return False, "Le format de la date de naissance est invalide (attendu: JJ/MM/AAAA).", []
+        return False, f"Âge insuffisant : {age} ans. (Âge minimum requis : 35 ans révolus).", []
         
     # 2. Nationalité
     if not verifier_nationalite(donnees_candidat['nationalite']):
-        return False, f"Nationalité invalide : '{donnees_candidat['nationalite']}'. (Nationalité sénégalaise requise)."
+        return False, f"Nationalité invalide : '{donnees_candidat['nationalite']}'. (Nationalité sénégalaise requise).", []
         
     # 3. Parrainages
     est_parrainage_valide, message = valider_parrainages(chemin_fichier_parrainages, chemin_fichier_electoral, campagne_id)
     if not est_parrainage_valide:
-        return False, f"Rejet lié aux parrainages : {message}"
+        return False, f"Rejet lié aux parrainages : {message}", []
         
     # Récupérer les NINs des parrainages valides pour enregistrement
     try:
